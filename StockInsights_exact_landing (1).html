@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>StockInsights — Free Telegram Community</title>
+<style>
+:root{
+  --bg:#020817; --panel:#081122; --panel2:#0b1426; --line:#18243a;
+  --text:#f4f7fb; --muted:#91a5c4; --blue:#18a8e6; --green:#2ee0a4;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;line-height:1.5}
+a{text-decoration:none;color:inherit}
+.header{height:78px;border-bottom:1px solid #111b2c;background:#020817;display:flex;align-items:center}
+.nav{width:min(1430px,92%);margin:auto;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:11px;font-size:21px;font-weight:800}
+.logo{width:46px;height:46px;border-radius:11px;background:linear-gradient(135deg,#22d3a5,#0da5d9);display:grid;place-items:center;font-size:25px;font-weight:900}
+.join{background:var(--blue);padding:12px 27px;border-radius:30px;font-weight:800;box-shadow:0 9px 28px #069fe93d}
+.ticker{height:52px;overflow:hidden;background:#0b1425;border-bottom:1px solid #1b2840;white-space:nowrap}
+.track{display:inline-flex;align-items:center;height:100%;gap:42px;animation:scroll 32s linear infinite}
+.t{font-size:17px;color:#9cafc8}.t b{color:#e8eef7}.up{color:#24d9a4}.down{color:#ff5c78}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+.hero{min-height:720px;display:flex;align-items:center;justify-content:center;text-align:center;padding:100px 20px 90px}
+.hero-inner{max-width:900px}
+.badge{display:inline-flex;gap:9px;align-items:center;border:1px solid #08745e;background:#06251f;color:#3be3b1;border-radius:30px;padding:8px 17px;font-weight:700}
+.badge i{width:9px;height:9px;border-radius:50%;background:#2ee0a4;box-shadow:0 0 0 0 #2ee0a477;animation:pulse 1.8s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px #2ee0a400}100%{box-shadow:0 0 0 0 #2ee0a400}}
+h1{font-size:clamp(48px,6.5vw,78px);line-height:1.03;letter-spacing:-3px;margin:52px 0 28px;font-weight:900}
+.green{color:#30dca7}
+.hero p{max-width:830px;margin:auto;color:#9bb0cf;font-size:21px}
+.actions{display:flex;justify-content:center;gap:18px;margin-top:42px;flex-wrap:wrap}
+.btn{min-width:370px;padding:20px 28px;border-radius:45px;font-size:20px;font-weight:850;display:flex;align-items:center;justify-content:center;gap:16px}
+.primary{background:#16a8e6;box-shadow:0 14px 30px #0aa9ed38}
+.secondary{background:#0d1324;border:1px solid #263149;min-width:225px}
+.telegram{font-size:25px}.arrow{font-size:27px}
+
+.section{padding:110px 20px}.dark2{background:#071021}
+.container{width:min(1170px,92%);margin:auto}
+.title{text-align:center;font-size:48px;letter-spacing:-1.5px;margin:0 0 12px;font-weight:900}
+.sub{text-align:center;color:#8ea4c4;font-size:20px;margin:0 auto 65px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:30px}
+.card{background:#091225;border:1px solid #1b2942;border-radius:22px;padding:31px;min-height:290px}
+.icon{font-size:40px;color:#2ee0a4;margin-bottom:25px}.card h3{font-size:22px;margin:0 0 19px}
+.list{margin:0;padding:0;list-style:none;color:#9ab0ce;font-size:17px}
+.list li{margin:14px 0}.check{color:#24dca8;margin-right:10px}
+
+.steps{display:grid;gap:30px;max-width:1120px;margin:auto}
+.step{background:#091225;border:1px solid #1b2942;border-radius:22px;padding:31px;display:flex;align-items:center;gap:27px}
+.num{width:73px;height:73px;border-radius:15px;background:#0b2a4a;border:1px solid #0b6391;color:#20b8fa;display:grid;place-items:center;font-size:23px;font-weight:900;flex:none}
+.step h3{margin:0 0 7px;font-size:22px}.step p{margin:0;color:#91a8c7;font-size:18px}.up-arrow{margin-left:auto;color:#60718d;font-size:27px}
+
+.joinbox{width:min(990px,92%);margin:auto;text-align:center;padding:72px 30px;background:linear-gradient(145deg,#03242d,#031b2b);border:1px solid #06495c;border-radius:30px}
+.joinbox .tg{width:84px;height:84px;background:#16a8e6;border-radius:20px;display:grid;place-items:center;margin:auto;font-size:42px}
+.joinbox h2{font-size:48px;margin:30px 0 13px}.joinbox p{color:#a5bad6;font-size:20px;max-width:750px;margin:0 auto 35px}
+.disclaimer{max-width:990px;margin:80px auto 0;padding:22px;border:1px solid #1a2840;background:#091225;border-radius:15px;color:#9db0cc}
+.disclaimer summary{cursor:pointer;font-size:16px;color:#b6c6dc}.disclaimer p{font-size:14px;color:#778ba8}
+
+.stats{display:grid;grid-template-columns:repeat(4,1fr);padding:80px 20px;background:#091225;text-align:center}
+.stat strong{font-size:46px;display:block}.stat span{color:#6f88ad;font-size:17px}
+
+.footer{border-top:1px solid #101a2d;padding:55px 20px;color:#6e82a4}.foot{width:min(1430px,92%);margin:auto;display:flex;align-items:center;justify-content:space-between}.links{display:flex;gap:35px}.foot .brand{color:#e9eef7}
+
+@media(max-width:800px){
+ .header{height:70px}.logo{width:40px;height:40px}.brand{font-size:17px}.join{padding:10px 18px}
+ .ticker{height:45px}.t{font-size:14px}
+ h1{font-size:45px;letter-spacing:-2px;margin-top:35px}.hero{min-height:auto;padding:85px 16px}
+ .hero p{font-size:17px}.btn{min-width:100%;font-size:18px}.title,.joinbox h2{font-size:37px}
+ .cards{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr);gap:45px 15px}
+ .step{padding:22px;gap:17px}.step h3{font-size:19px}.step p{font-size:15px}.num{width:60px;height:60px}
+ .foot{flex-direction:column;gap:25px}.links{gap:20px}
+}
+</style>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1076863418364302');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1076863418364302&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+</head>
+<body>
+
+<header class="header">
+ <nav class="nav">
+  <a class="brand" href="#"><span class="logo">↗</span>StockInsights</a>
+  <a class="join" href="https://t.me/+bVvmBNkwhm4wYTRl" target="_blank">✈ &nbsp; Join Free</a>
+ </nav>
+</header>
+
+<div class="ticker"><div class="track">
+ <span class="t">SENSEX&nbsp; 79,940 <span class="up">▲ +0.82%</span></span>
+ <span class="t">BANK NIFTY&nbsp; 52,310 <span class="down">▼ -0.24%</span></span>
+ <span class="t">RELIANCE&nbsp; 2,945 <span class="up">▲ +1.20%</span></span>
+ <span class="t">TCS&nbsp; 4,120 <span class="up">▲ +0.45%</span></span>
+ <span class="t">HDFC BANK&nbsp; 1,680 <span class="down">▼ -0.60%</span></span>
+ <span class="t">INFY&nbsp; 1,855 <span class="up">▲ +0.92%</span></span>
+ <span class="t">ITC&nbsp; 478 <span class="up">▲ +0.35%</span></span>
+ <span class="t">NIFTY 50&nbsp; 24,180 <span class="up">▲ +0.85%</span></span>
+ <span class="t">SENSEX&nbsp; 79,940 <span class="up">▲ +0.82%</span></span>
+ <span class="t">BANK NIFTY&nbsp; 52,310 <span class="down">▼ -0.24%</span></span>
+ <span class="t">RELIANCE&nbsp; 2,945 <span class="up">▲ +1.20%</span></span>
+ <span class="t">TCS&nbsp; 4,120 <span class="up">▲ +0.45%</span></span>
+ <span class="t">HDFC BANK&nbsp; 1,680 <span class="down">▼ -0.60%</span></span>
+</div></div>
+
+<section class="hero">
+ <div class="hero-inner">
+  <div class="badge"><i></i> Free Educational Community</div>
+  <h1>Stock Market <span class="green">Insights</span><br>Seedha Aapke Phone Par</h1>
+  <p>Daily educational updates, market analysis aur simple technical insights — sab kuch hamare free Telegram community mein. Beginner ya experienced, sabke liye kuch na kuch.</p>
+  <div class="actions">
+   <a class="btn primary" href="https://t.me/+bVvmBNkwhm4wYTRl" target="_blank"><span class="telegram">✈</span> Join Free Telegram <span class="arrow">→</span></a>
+   <a class="btn secondary" href="#approach">Learn More <span>⌄</span></a>
+  </div>
+ </div>
+</section>
+
+<section class="section" id="approach">
+ <div class="container">
+  <h2 class="title">Hamara Approach</h2>
+  <p class="sub">Hum sirf education ke liye yahan hain. Transparency aur honesty hamari priority.</p>
+  <div class="cards">
+   <article class="card"><div class="icon">♢</div><h3>Sirf Educational</h3><ul class="list"><li><span class="check">⊙</span>No paid tips ya recommendations</li><li><span class="check">⊙</span>Sirf market analysis aur learning</li><li><span class="check">⊙</span>Beginner-friendly content</li></ul></article>
+   <article class="card"><div class="icon">◎</div><h3>Open &amp; Honest</h3><ul class="list"><li><span class="check">⊙</span>Saari updates free aur public</li><li><span class="check">⊙</span>Koi hidden charges nahi</li><li><span class="check">⊙</span>Community-driven discussions</li></ul></article>
+   <article class="card"><div class="icon">◉</div><h3>Consistent Quality</h3><ul class="list"><li><span class="check">⊙</span>Daily updates bina fail</li><li><span class="check">⊙</span>Simple language mein samjhaya</li><li><span class="check">⊙</span>Charts aur examples ke saath</li></ul></article>
+  </div>
+ </div>
+</section>
+
+<section class="section">
+ <div class="container">
+  <h2 class="title">Kaise Join Karein?</h2>
+  <p class="sub">Teen simple steps mein community ka part banein.</p>
+  <div class="steps">
+   <div class="step"><div class="num">01</div><div><h3>Telegram Par Click Karein</h3><p>Niche diye gaye button par click karke hamare Telegram channel par jayein.</p></div><span class="up-arrow">↑</span></div>
+   <div class="step"><div class="num">02</div><div><h3>Join Button Dabayen</h3><p>Channel par "Join" button dabayein aur community ka part banein — bilkul free.</p></div><span class="up-arrow">↑</span></div>
+   <div class="step"><div class="num">03</div><div><h3>Updates Paayein</h3><p>Ab har roz market analysis aur educational updates seedha aapke phone par.</p></div><span class="up-arrow">↑</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="section dark2">
+ <div class="joinbox">
+  <div class="tg">✈</div>
+  <h2>Abhi Join Karein — Bilkul Free</h2>
+  <p>Hazaar se zyada learners hamare saath hain. Aap bhi aaj se daily market education paayein.</p>
+  <a class="btn primary" style="margin:auto;max-width:370px" href="https://t.me/+bVvmBNkwhm4wYTRl" target="_blank"><span class="telegram">✈</span> Join Free Telegram <span class="arrow">→</span></a>
+ </div>
+ <details class="disclaimer"><summary>🛡️ &nbsp; Risk Disclosure &amp; Disclaimer</summary><p>Stock market investments are subject to market risks. Content on this page is for educational purposes only and is not financial advice. Do your own research before making investment decisions.</p></details>
+</section>
+
+<section class="stats">
+ <div class="stat"><strong>10K+</strong><span>Community Members</span></div>
+ <div class="stat"><strong>500+</strong><span>Educational Posts</span></div>
+ <div class="stat"><strong>Daily</strong><span>Market Updates</span></div>
+ <div class="stat"><strong>100%</strong><span>Free Forever</span></div>
+</section>
+
+<footer class="footer">
+ <div class="foot">
+  <div class="brand"><span class="logo">↗</span>StockInsights</div>
+  <div class="links"><a href="#">Privacy Policy</a><a href="#">Terms</a><a href="https://t.me/+bVvmBNkwhm4wYTRl" target="_blank">Telegram</a></div>
+  <div>© 2026 StockInsights. Educational only.</div>
+ </div>
+</footer>
+
+</body>
+</html>
